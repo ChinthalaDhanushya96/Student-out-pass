@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Student Outpass Management System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Smart Student Outpass</h1>
+      <p>College Outpass Management System</p>
+    </div>
+    <button id="logoutBtn" class="btn danger hidden">Logout</button>
+  </header>
+
+  <main class="container">
+    <section id="loginSection" class="card login-card">
+      <h2>Login</h2>
+      <p class="muted">Login as Student or Admin</p>
+      <form id="loginForm">
+        <label>Email</label>
+        <input id="email" type="email" placeholder="Enter email" required>
+        <label>Password</label>
+        <input id="password" type="password" placeholder="Enter password" required>
+        <label>Role</label>
+        <select id="role">
+          <option value="student">Student</option>
+          <option value="admin">Admin</option>
+        </select>
+        <button class="btn primary" type="submit">Login</button>
+      </form>
+      <p id="loginMessage" class="message"></p>
+    </section>
+
+    <section id="studentSection" class="hidden">
+      <div class="section-title">
+        <div>
+          <h2>Student Dashboard</h2>
+          <p class="muted">Submit and track your outpass requests.</p>
+        </div>
+      </div>
+
+      <div class="grid two">
+        <div class="card">
+          <h3>Submit Outpass Request</h3>
+          <form id="outpassForm">
+            <label>Reason</label>
+            <input id="reason" required placeholder="Example: Medical appointment">
+            <label>From Date & Time</label>
+            <input id="fromTime" type="datetime-local" required>
+            <label>To Date & Time</label>
+            <input id="toTime" type="datetime-local" required>
+            <label>Destination</label>
+            <input id="destination" required placeholder="Enter destination">
+            <label>Parent/Guardian Contact</label>
+            <input id="guardianContact" required placeholder="Phone number">
+            <button class="btn primary" type="submit">Submit Request</button>
+          </form>
+          <p id="outpassMessage" class="message"></p>
+        </div>
+
+        <div class="card">
+          <h3>My Request History</h3>
+          <div class="stats">
+            <div><strong id="myTotal">0</strong><span>Total</span></div>
+            <div><strong id="myPending">0</strong><span>Pending</span></div>
+            <div><strong id="myApproved">0</strong><span>Approved</span></div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Reason</th><th>Destination</th><th>Time</th><th>Status</th></tr></thead>
+              <tbody id="studentTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="adminSection" class="hidden">
+      <div class="section-title">
+        <div>
+          <h2>Admin Dashboard</h2>
+          <p class="muted">Review, approve, reject and search outpass requests.</p>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div><strong id="adminTotal">0</strong><span>Total</span></div>
+        <div><strong id="adminPending">0</strong><span>Pending</span></div>
+        <div><strong id="adminApproved">0</strong><span>Approved</span></div>
+        <div><strong id="adminRejected">0</strong><span>Rejected</span></div>
+      </div>
+
+      <div class="card">
+        <div class="filters">
+          <input id="searchInput" placeholder="Search student, reason or destination">
+          <select id="statusFilter">
+            <option value="">All Status</option>
+            <option value="pending">Pending</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+          </select>
+          <button class="btn secondary" onclick="loadAdminRequests()">Search</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Student</th><th>Reason</th><th>Destination</th><th>From</th><th>To</th><th>Status</th><th>Action</th></tr>
+            </thead>
+            <tbody id="adminTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
